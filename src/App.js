@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import ClientDashboard from './components/ClientDashboard';
+import MailMessaging from './components/MailMessaging';
 import Login from './components/Login';
 
 const App = () => {
@@ -12,6 +13,8 @@ const App = () => {
         <Route path="/logs" element={<ClientDashboard />} />
         <Route path="/clients" element={<ClientDashboard />} />
         <Route path="/client-details" element={<ClientDashboard />} />
+        <Route path="/" element={<ClientDashboard />} />
+        <Route path="/mail-messaging" element={<MailMessaging />} />
       </Routes>
     </Router>
   );

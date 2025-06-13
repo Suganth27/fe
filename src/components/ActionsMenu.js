@@ -4,16 +4,6 @@ import { ChevronDown, ChevronRight, House, Mail, Database, LogOut } from 'lucide
 
 const ActionsMenu = ({ isOpen, onToggle, onSelect }) => {
   const navigate = useNavigate();
-  <button
-  onClick={() => {
-    onToggle();
-    onSelect('clientDetails');
-    navigate('/client-details');
-  }}
->
-  Client Details
-</button>
-
   const [isDatabaseMenuOpen, setIsDatabaseMenuOpen] = useState(false);
 
   return (
@@ -37,6 +27,7 @@ const ActionsMenu = ({ isOpen, onToggle, onSelect }) => {
               onClick={() => {
                 onToggle();
                 onSelect('logs');
+                navigate('/');
               }}
             >
               <House size={16} className="text-green-600" />
@@ -47,6 +38,7 @@ const ActionsMenu = ({ isOpen, onToggle, onSelect }) => {
               onClick={() => {
                 onToggle();
                 onSelect('mail');
+                navigate('/mail-messaging');
               }}
             >
               <Mail size={16} className="text-blue-600" />

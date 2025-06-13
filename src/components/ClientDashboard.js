@@ -7,6 +7,7 @@ import { getStatusColor, getLogStatusColor } from '../utils/utils';
 import ActionsMenu from './ActionsMenu';
 import AddClientForm from './AddClientForm';
 import { Search, Users, Bookmark, Edit, Trash2, Plus, Copy } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const ClientDashboard = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -15,6 +16,7 @@ const ClientDashboard = () => {
   const [showAddForm, setShowAddForm] = useState(false);
 
   const [clients, setClients] = useState(initialClients);
+  const navigate = useNavigate();
 
   const handleCopy = (client) => {
     const text = `Name: ${client.name}\nCompany: ${client.company}\nClient ID: ${client.clientId}\nProduct: ${client.productType}`;
@@ -96,9 +98,13 @@ const ClientDashboard = () => {
             isOpen={isActionsOpen}
             onToggle={() => setIsActionsOpen(!isActionsOpen)}
             onSelect={(view) => {
-            setCurrentView(view);
-            setIsActionsOpen(false);
-          }}
+              if (view === 'mail') {
+                navigate('/mail-messaging');
+              } else {
+                setCurrentView(view);
+              }
+              setIsActionsOpen(false);
+            }}
           />
         
           <div className="flex items-center gap-2 text-gray-600 cursor-pointer hover:text-gray-800"
