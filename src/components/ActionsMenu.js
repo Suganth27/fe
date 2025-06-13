@@ -80,6 +80,7 @@ const ActionsMenu = ({ isOpen, onToggle, onSelect }) => {
                       onClick={() => {
                         onToggle();
                         onSelect('products');
+                        navigate('/products');
                       }}
                     >
                       Products

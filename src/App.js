@@ -4,6 +4,7 @@ import ClientDashboard from './components/ClientDashboard';
 import MailMessaging from './components/MailMessaging';
 import Login from './components/Login';
 import FamilyPage from './components/FamilyPage';
+import ProductsPage from './components/ProductsPage';
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
         <Route path="/" element={<ClientDashboard />} />
         <Route path="/mail-messaging" element={<MailMessaging />} />
         <Route path="/family" element={<FamilyPage />} />
+        <Route path="/products" element={<ProductsPage />} />
       </Routes>
     </Router>
   );
