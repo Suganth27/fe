@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Plus, Edit, Trash2, Users, Copy, Search } from 'lucide-react';
+import ActionsMenu from './ActionsMenu';
 // import AddClientForm from './AddClientForm';
 
 // Placeholder clients and families data
@@ -66,6 +67,7 @@ const FamilyPage = () => {
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [deleteFamilyId, setDeleteFamilyId] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [isActionsOpen, setIsActionsOpen] = useState(false);
 
   // Add Family
   const handleAddFamily = (family) => {
@@ -241,6 +243,14 @@ const FamilyPage = () => {
               className="w-64 py-2 pl-10 pr-4 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
           </div>
+        </div>
+        {/* ActionsMenu row below the subtitle */}
+        <div className="flex items-center mb-6">
+          <ActionsMenu
+            isOpen={isActionsOpen}
+            onToggle={() => setIsActionsOpen(!isActionsOpen)}
+            onSelect={() => setIsActionsOpen(false)}
+          />
         </div>
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {filteredFamilies.map(family => (

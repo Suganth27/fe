@@ -126,6 +126,9 @@ const AddClientForm = ({
           <option value="Investment">Investment</option>
           <option value="Finance">Finance</option>
           <option value="Insurance">Insurance</option>
+          <option value="Savings">Savings</option>
+          <option value="Mortgage">Mortgage</option>
+          <option value="Child Savings">Child Savings</option>
         </select>
         {/* Status Toggle */}
         <div>

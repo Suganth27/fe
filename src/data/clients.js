@@ -82,6 +82,42 @@ const clients = [
     dob: '1998-12-25',
     gender: 'Male',
     productType: 'Finance'
+  },
+  {
+    id: 8,
+    name: 'Sophia Green',
+    company: 'Green Bank',
+    status: 'Active',
+    email: 'sophia.green@greenbank.com',
+    phone: '(555) 888-1234',
+    clientId: 'GREEN-008',
+    dob: '1990-04-12',
+    gender: 'Female',
+    productType: 'Savings'
+  },
+  {
+    id: 9,
+    name: 'Liam Carter',
+    company: 'Home Mortgage Ltd',
+    status: 'Pending',
+    email: 'liam.carter@homemortgage.com',
+    phone: '(555) 777-5678',
+    clientId: 'HOME-009',
+    dob: '1982-09-30',
+    gender: 'Male',
+    productType: 'Mortgage'
+  },
+  {
+    id: 10,
+    name: 'Olivia Young',
+    company: 'Future Kids',
+    status: 'Active',
+    email: 'olivia.young@futurekids.com',
+    phone: '(555) 666-4321',
+    clientId: 'FUTURE-010',
+    dob: '2015-06-21',
+    gender: 'Female',
+    productType: 'Child Savings'
   }
 ];
 

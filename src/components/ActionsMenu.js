@@ -27,7 +27,7 @@ const ActionsMenu = ({ isOpen, onToggle, onSelect }) => {
               onClick={() => {
                 onToggle();
                 onSelect('logs');
-                navigate('/');
+                navigate('/logs');
               }}
             >
               <House size={16} className="text-green-600" />
@@ -79,15 +79,6 @@ const ActionsMenu = ({ isOpen, onToggle, onSelect }) => {
                       className="flex items-center w-full gap-3 px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-50"
                       onClick={() => {
                         onToggle();
-                        onSelect('clientProducts');
-                      }}
-                    >
-                      Client Products
-                    </button>
-                    <button
-                      className="flex items-center w-full gap-3 px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-50"
-                      onClick={() => {
-                        onToggle();
                         onSelect('products');
                       }}
                     >
@@ -111,6 +102,7 @@ const ActionsMenu = ({ isOpen, onToggle, onSelect }) => {
               onClick={() => {
                 onToggle();
                 onSelect('exit');
+                window.history.back();
               }}
             >
               <LogOut size={16} className="text-red-600" />
