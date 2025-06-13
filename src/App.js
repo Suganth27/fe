@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import ClientDashboard from './components/ClientDashboard';
 import MailMessaging from './components/MailMessaging';
 import Login from './components/Login';
+import FamilyPage from './components/FamilyPage';
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
         <Route path="/client-details" element={<ClientDashboard />} />
         <Route path="/" element={<ClientDashboard />} />
         <Route path="/mail-messaging" element={<MailMessaging />} />
+        <Route path="/family" element={<FamilyPage />} />
       </Routes>
     </Router>
   );

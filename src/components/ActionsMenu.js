@@ -70,6 +70,7 @@ const ActionsMenu = ({ isOpen, onToggle, onSelect }) => {
                       onClick={() => {
                         onToggle();
                         onSelect('family');
+                        navigate('/family');
                       }}
                     >
                       Family

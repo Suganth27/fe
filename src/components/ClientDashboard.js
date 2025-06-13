@@ -14,6 +14,10 @@ const ClientDashboard = () => {
   const [isActionsOpen, setIsActionsOpen] = useState(false);
   const [currentView, setCurrentView] = useState('logs');
   const [showAddForm, setShowAddForm] = useState(false);
+  const [showEditForm, setShowEditForm] = useState(false);
+  const [editClient, setEditClient] = useState(null);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [deleteClientId, setDeleteClientId] = useState(null);
 
   const [clients, setClients] = useState(initialClients);
   const navigate = useNavigate();
@@ -29,6 +33,33 @@ const ClientDashboard = () => {
       client.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       client.company.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  // Edit handler
+  const handleEdit = (client) => {
+    setEditClient(client);
+    setShowEditForm(true);
+  };
+
+  const handleUpdateClient = (updatedClient) => {
+    setClients(prev => prev.map(c => c.id === editClient.id ? { ...c, ...updatedClient } : c));
+  };
+
+  // Delete handler
+  const handleDelete = (clientId) => {
+    setDeleteClientId(clientId);
+    setShowDeleteConfirm(true);
+  };
+
+  const confirmDelete = () => {
+    setClients(prev => prev.filter(c => c.id !== deleteClientId));
+    setShowDeleteConfirm(false);
+    setDeleteClientId(null);
+  };
+
+  const cancelDelete = () => {
+    setShowDeleteConfirm(false);
+    setDeleteClientId(null);
+  };
 
   return (
     <div className="min-h-screen bg-gray-50" onClick={() => setIsActionsOpen(false)}>
@@ -50,6 +81,29 @@ const ClientDashboard = () => {
         setClients(prev => [...prev, clientWithId]);
       }}
     />
+  </div>
+)}
+{showEditForm && (
+  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+    <AddClientForm
+      onClose={() => setShowEditForm(false)}
+      onAddClient={handleUpdateClient}
+      initialValues={editClient}
+      status={editClient?.status || 'Active'}
+      submitLabel="Update"
+    />
+  </div>
+)}
+{showDeleteConfirm && (
+  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+    <div className="max-w-sm p-6 mx-auto bg-white rounded-lg shadow-lg">
+      <h2 className="mb-4 text-lg font-semibold text-gray-900">Delete Client</h2>
+      <p className="mb-6 text-gray-700">Are you sure you want to delete this client?</p>
+      <div className="flex justify-end gap-4">
+        <button onClick={cancelDelete} className="px-4 py-2 bg-gray-200 rounded">Cancel</button>
+        <button onClick={confirmDelete} className="px-4 py-2 text-white bg-red-600 rounded">Delete</button>
+      </div>
+    </div>
   </div>
 )}
 
@@ -211,11 +265,13 @@ const ClientDashboard = () => {
                   </div>
 
                   <div className="flex gap-3">
-                    <button className="flex items-center justify-center flex-1 gap-2 px-3 py-2 text-sm font-medium text-gray-700 transition-colors bg-gray-100 rounded-lg hover:bg-gray-200">
+                    <button className="flex items-center justify-center flex-1 gap-2 px-3 py-2 text-sm font-medium text-gray-700 transition-colors bg-gray-100 rounded-lg hover:bg-gray-200"
+                      onClick={() => handleEdit(client)}>
                       <Edit size={14} />
                       Edit
                     </button>
-                    <button className="flex items-center justify-center flex-1 gap-2 px-3 py-2 text-sm font-medium text-red-600 transition-colors rounded-lg bg-red-50 hover:bg-red-100">
+                    <button className="flex items-center justify-center flex-1 gap-2 px-3 py-2 text-sm font-medium text-red-600 transition-colors rounded-lg bg-red-50 hover:bg-red-100"
+                      onClick={() => handleDelete(client.id)}>
                       <Trash2 size={14} />
                       Delete
                     </button>

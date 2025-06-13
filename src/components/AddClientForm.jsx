@@ -1,6 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-const AddClientForm = ({ onClose, onAddClient }) => {
+const statusOptions = ['Active', 'Inactive', 'Pending'];
+
+const AddClientForm = ({
+  onClose,
+  onAddClient,
+  initialValues = {},
+  status = 'Active',
+  onStatusChange,
+  submitLabel = 'Submit',
+}) => {
   const [formData, setFormData] = useState({
     name: '',
     company: '',
@@ -9,18 +18,38 @@ const AddClientForm = ({ onClose, onAddClient }) => {
     dob: '',
     gender: '',
     clientId: '',
-    productType: 'Loan'
+    productType: 'Loan',
   });
+  const [clientStatus, setClientStatus] = useState(status);
+
+  useEffect(() => {
+    setFormData({
+      name: initialValues.name || '',
+      company: initialValues.company || '',
+      email: initialValues.email || '',
+      phone: initialValues.phone || '',
+      dob: initialValues.dob || '',
+      gender: initialValues.gender || '',
+      clientId: initialValues.clientId || '',
+      productType: initialValues.productType || 'Loan',
+    });
+    setClientStatus(status || 'Active');
+  }, [initialValues, status]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onAddClient(formData);
+    onAddClient({ ...formData, status: clientStatus });
     onClose();
+  };
+
+  const handleStatusChange = (e) => {
+    setClientStatus(e.target.value);
+    if (onStatusChange) onStatusChange(e.target.value);
   };
 
   return (
     <div className="max-w-md p-6 mx-auto bg-white rounded-lg shadow-lg">
-      <h2 className="mb-4 text-xl font-semibold">Add New Client</h2>
+      <h2 className="mb-4 text-xl font-semibold">{submitLabel === 'Update' ? 'Edit Client' : 'Add New Client'}</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <input
           type="text"
@@ -98,12 +127,25 @@ const AddClientForm = ({ onClose, onAddClient }) => {
           <option value="Finance">Finance</option>
           <option value="Insurance">Insurance</option>
         </select>
+        {/* Status Toggle */}
+        <div>
+          <label className="block mb-1 font-medium">Status</label>
+          <select
+            value={clientStatus}
+            onChange={handleStatusChange}
+            className="w-full px-4 py-2 border rounded-md"
+          >
+            {statusOptions.map((opt) => (
+              <option key={opt} value={opt}>{opt}</option>
+            ))}
+          </select>
+        </div>
         <div className="flex justify-end gap-4">
           <button type="button" onClick={onClose} className="px-4 py-2 bg-gray-200 rounded">
             Cancel
           </button>
           <button type="submit" className="px-4 py-2 text-white bg-blue-600 rounded">
-            Submit
+            {submitLabel}
           </button>
         </div>
       </form>
