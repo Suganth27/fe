@@ -79,6 +79,16 @@ const ActionsMenu = ({ isOpen, onToggle, onSelect }) => {
                       className="flex items-center w-full gap-3 px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-50"
                       onClick={() => {
                         onToggle();
+                        onSelect('clientProducts');
+                        navigate('/client-products');
+                      }}
+                    >
+                      Client Products
+                    </button>
+                    <button
+                      className="flex items-center w-full gap-3 px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-50"
+                      onClick={() => {
+                        onToggle();
                         onSelect('products');
                         navigate('/products');
                       }}

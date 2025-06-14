@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ChevronDown, Paperclip, Image as ImageIcon, FileText, Plus } from 'lucide-react';
+import ActionsMenu from './ActionsMenu';
 
 const familyOptions = [
   { label: 'All Families', value: 'all' },
@@ -31,6 +32,8 @@ const MailMessaging = () => {
   const [message, setMessage] = useState('');
   const [attachments, setAttachments] = useState([]);
 
+  const [isActionsOpen, setIsActionsOpen] = useState(false);
+
   // Handle file/image insert
   const handleFileChange = (e) => {
     const files = Array.from(e.target.files);
@@ -53,6 +56,13 @@ const MailMessaging = () => {
           <Plus size={18} />
           New Mail
         </button>
+      </div>
+      <div className="px-6 pt-4 pb-2">
+        <ActionsMenu
+          isOpen={isActionsOpen}
+          onToggle={() => setIsActionsOpen(!isActionsOpen)}
+          onSelect={() => setIsActionsOpen(false)}
+        />
       </div>
       {/* Controls Row: Filters, Insert, Templates */}
       <div className="flex items-center gap-4 px-6 py-4 bg-white border-b border-gray-100">
